@@ -1,34 +1,33 @@
 class Sensor{
     constructor(car){
-        this.car = car;
-        this.rayCount = 5;
-        this.rayLength = 150;
-        this.raySpread = Math.PI/2;
+        this.car=car;
+        this.rayCount=5;
+        this.rayLength=150;
+        this.raySpread=Math.PI/2;
 
         this.rays=[];
         this.readings=[];
     }
 
-
     update(roadBorders,traffic){
         this.#castRays();
-        this.readings = [];
-        for(let i=0; i<this.rays.length;i++){
+        this.readings=[];
+        for(let i=0;i<this.rays.length;i++){
             this.readings.push(
                 this.#getReading(
-                    this.rays[i], 
+                    this.rays[i],
                     roadBorders,
                     traffic
                 )
-            )
+            );
         }
     }
 
-    #getReading(ray,roadBorders,traffic) {
-        let touches = [];
-        
-        for(let i = 0; i < roadBorders.length;i++){
-            const touch = getIntersection(
+    #getReading(ray,roadBorders,traffic){
+        let touches=[];
+
+        for(let i=0;i<roadBorders.length;i++){
+            const touch=getIntersection(
                 ray[0],
                 ray[1],
                 roadBorders[i][0],
@@ -37,13 +36,12 @@ class Sensor{
             if(touch){
                 touches.push(touch);
             }
-
         }
 
-        for(let i = 0;i < traffic.length;i++){
-            const poly = traffic[i].polygon;
-            for (let j=0; j < poly.length; j++){
-                const value = getIntersection(
+        for(let i=0;i<traffic.length;i++){
+            const poly=traffic[i].polygon;
+            for(let j=0;j<poly.length;j++){
+                const value=getIntersection(
                     ray[0],
                     ray[1],
                     poly[j],
@@ -53,7 +51,6 @@ class Sensor{
                     touches.push(value);
                 }
             }
-
         }
 
         if(touches.length==0){
@@ -85,7 +82,6 @@ class Sensor{
         }
     }
 
-
     draw(ctx){
         for(let i=0;i<this.rayCount;i++){
             let end=this.rays[i][1];
@@ -106,8 +102,6 @@ class Sensor{
             );
             ctx.stroke();
 
-
-
             ctx.beginPath();
             ctx.lineWidth=2;
             ctx.strokeStyle="black";
@@ -120,8 +114,6 @@ class Sensor{
                 end.y
             );
             ctx.stroke();
-
-            
         }
     }        
 }

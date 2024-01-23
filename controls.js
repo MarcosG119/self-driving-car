@@ -1,9 +1,9 @@
 class Controls{
-    constructor(type) {
-        this.forward = false;
-        this.left = false;
-        this.right = false;
-        this.reverse = false;
+    constructor(type){
+        this.forward=false;
+        this.left=false;
+        this.right=false;
+        this.reverse=false;
 
         switch(type){
             case "KEYS":
@@ -15,9 +15,9 @@ class Controls{
         }
     }
 
-    #addKeyboardListeners() {
-        document.onkeydown = (e) => {
-            switch(e.key){
+    #addKeyboardListeners(){
+        document.onkeydown=(event)=>{
+            switch(event.key){
                 case "ArrowLeft":
                     this.left=true;
                     break;
@@ -31,10 +31,9 @@ class Controls{
                     this.reverse=true;
                     break;
             }
-        };
-
-        document.onkeyup = (e) => {
-            switch(e.key){
+        }
+        document.onkeyup=(event)=>{
+            switch(event.key){
                 case "ArrowLeft":
                     this.left=false;
                     break;
@@ -48,8 +47,6 @@ class Controls{
                     this.reverse=false;
                     break;
             }
-        };
-
+        }
     }
-
 }
